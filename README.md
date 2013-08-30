@@ -30,7 +30,7 @@ Make di-H events decay and hadronize in CMSSW
   <li>run
     <ul>
       <li>####                                                                     seed       folder             model     energy</li>
-      <li>for ((  i = 0 ;  i < 10;  i++  ))  do bsub -q 8nh "DecayAndHadronize.sh   $i    MyS05at13TeV_10k_    SO5at13TeV    13"; done</li>
+      <li>for ((  i = 0 ;  i \< 10;  i++  ))  do bsub -q 8nh "DecayAndHadronize.sh   $i    MyS05at13TeV_10k_    SO5at13TeV    13"; done</li>
     </ul>
   </li>
 </ul>
