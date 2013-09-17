@@ -41,7 +41,7 @@ process.options = cms.untracked.PSet(
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
     version = cms.untracked.string('$Revision: 1.2 $'),
-    annotation = cms.untracked.string('POWHEG + PYTHIA6 + Tauola - Higgs -> WW -> lnulnu at 8TeV'),
+    annotation = cms.untracked.string('POWHEG + PYTHIA6 + Tauola - HiggsHiggs -> bbgg at TEMPLATEENERGY TeV'),
     name = cms.untracked.string('$Source: /local/reps/CMSSW/CMSSW/Configuration/GenProduction/python/EightTeV/POWHEG_PYTHIA6_Tauola_H_WW_lnulnu_withTau_8TeV_cff.py,v $')
 )
 
@@ -84,7 +84,7 @@ process.generator = cms.EDFilter("Pythia6HadronizerFilter",
     filterEfficiency = cms.untracked.double(1.0),
     pythiaHepMCVerbosity = cms.untracked.bool(False),
     comEnergy = cms.double(TEMPLATEENERGY),
-    maxEventsToPrint = cms.untracked.int32(0),
+    maxEventsToPrint = cms.untracked.int32(10),
     PythiaParameters = cms.PSet(
         pythiaUESettings = cms.vstring('MSTU(21)=1     ! Check on possible errors during program execution', 
             'MSTJ(22)=2     ! Decay those unstable particles', 
