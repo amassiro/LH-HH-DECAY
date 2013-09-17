@@ -14,14 +14,14 @@ Make di-H events decay and hadronize in CMSSW
   </li>
   <li>copy into CMSSWrelease the cfg file
     <ul>           
-      <li>cp LH-HH-DECAY/POWHEG_PYTHIA6_Tauola_HH_bbWW_lnulnu_withTau_TEMPLATETeV_cff_py_GEN.py  CMSSW_5_3_9_patch1/src/POWHEG_PYTHIA6_Tauola_HH_bbWW_lnulnu_withTau_TEMPLATETeV_cff_py_GEN.py</li>
+      <li>cp LH-HH-DECAY/POWHEG_PYTHIA6_Tauola_HH_*_TEMPLATETeV_cff_py_GEN.py  CMSSW_5_3_9_patch1/src/</li>
       <li>cp LH-HH-DECAY/SubmitDecayAndHadronize.py     CMSSW_5_3_9_patch1/src/</li>
       <li>cp LH-HH-DECAY/DecayAndHadronize.sh  CMSSW_5_3_9_patch1/src/DecayAndHadronize.sh</li>
     </ul>
   </li>
   <li>what are the files you just copied:
     <ul>
-      <li>POWHEG_PYTHIA6_Tauola_HH_BLA_lnulnu_withTau_TEMPLATETeV_cff_py_GEN.py  :    generic config file for di-Higgs decay. BLA stands for Higgs decay channels, bbWW or bbgg </li>
+      <li>POWHEG_PYTHIA6_Tauola_HH_BLA_TEMPLATETeV_cff_py_GEN.py  :    generic config file for di-Higgs decay. BLA stands for Higgs decay channels, bbWW_lnulnu_withTau or bbgg </li>
       <li>SubmitDecayAndHadronize.py   a python script that creates bash scripts calling DecayAndHadronize.sh to submit to batch system</li>
       <li>DecayAndHadronize.sh  the actaual script that performs the decay and hadronization</li>
     </ul>
