@@ -4,11 +4,13 @@ import os
 import subprocess
 import sys
 
-max    = int(sys.argv[1])
-folder = sys.argv[2]
-model  = sys.argv[3]
-energy = sys.argv[4]
-csi    = sys.argv[5]
+max               = int(sys.argv[1])
+folder            = sys.argv[2]
+model             = sys.argv[3]
+energy            = sys.argv[4]
+csi               = sys.argv[5]
+destinationfolder = sys.argv[6]
+
 
 wd     = os.getcwd()
 queue  = '8nh'
@@ -26,8 +28,8 @@ if len(sys.argv) == 1:
 for i in range(max) :
   command = '#!/bin/bash\n\
               cd {PWD}\n\
-              ./DecayAndHadronize.sh {ITER} {FOLDER} {MODEL} {ENERGY} {CSI} \n \
-             '.format(PWD=wd, ITER=str(i), FOLDER=folder, MODEL=model, ENERGY=energy, CSI=csi).replace('  ','')
+              ./DecayAndHadronize.sh {ITER} {FOLDER} {MODEL} {ENERGY} {CSI} {DESTINATIONFOLDER}\n \
+             '.format(PWD=wd, ITER=str(i), FOLDER=folder, MODEL=model, ENERGY=energy, CSI=csi, DESTINATIONFOLDER=destinationfolder).replace('  ','')
 
   fname = '/'.join([wd,newfol,'sub_'+str(i)+'_'+model+'_'+energy+'_'+csi+'.sh'])
   f1    = open(fname, 'w+')

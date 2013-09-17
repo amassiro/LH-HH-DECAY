@@ -11,6 +11,8 @@ ENERGY=$4
 
 CSI=$5
 
+DESTINATIONFOLDER=$6
+
 
 
 # LHE before "higgs" transformation
@@ -98,7 +100,11 @@ echo ">>> copy result"
 # cp /tmp/amassiro/$NAMEGEN /afs/cern.ch/work/a/amassiro/Generation/HH/DATA/
 # cp /tmp/amassiro/$NAMEGEN /afs/cern.ch/user/a/amassiro/DATA/
 # eoscms cp /tmp/amassiro/$NAMEGEN   /store/caf/user/amassiro/TEST/
-rfcp   /tmp/$TESTFOLDER/$NAMEGEN   /castor/cern.ch/user/a/amassiro/HH-WWbb
+
+# rfcp   /tmp/$TESTFOLDER/$NAMEGEN   /castor/cern.ch/user/a/amassiro/HH-WWbb
+
+eoscms cp  /tmp/$TESTFOLDER/$NAMEGEN   eos/cms/store/user/amassiro/HH/VBF/$DESTINATIONFOLDER
+
 
 echo ">>> clean up a little"
 rm -r /tmp/$TESTFOLDER/

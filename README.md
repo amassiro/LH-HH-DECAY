@@ -29,13 +29,15 @@ Make di-H events decay and hadronize in CMSSW
   <li>run
     <ul>
       <li> To run on batch system:</li>
-      <li>   ./SubmitDecayAndHadronize.py    MAXITER    CASTORFOLDER                                  MODEL    ENERGY     CSI   </li>
-      <li>   ./SubmitDecayAndHadronize.py     1    /castor/cern.ch/user/a/amassiro/HHLHE-SO5-11Sep      SO5      13         10  </li>
+      <li>   ./SubmitDecayAndHadronize.py    MAXITER    CASTORFOLDER                                  MODEL    ENERGY     CSI      DESTINATIONFOLDER  </li>
+      <li>   ./SubmitDecayAndHadronize.py     1    /castor/cern.ch/user/a/amassiro/HHLHE-SO5-11Sep      SO5      13         10       WWbb </li>
     </ul>
   </li>
   <li>Results are saved on a castor folder defined in DecayAndHadronize.sh
     <ul>
-      <li>/castor/cern.ch/user/a/amassiro/HH-WWbb</li>
+      <li>/castor/cern.ch/user/a/amassiro/HH-WWbb   ---> old version</li>
+      <li>eos/cms/store/user/amassiro/HH/VBF/</li>
+      <li>in subdirectories defined by "DESTINATIONFOLDER", as WWbb and ggbb</li>
     </ul>
   </li>
 </ul>
