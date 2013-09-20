@@ -77,7 +77,7 @@ cd /afs/cern.ch/work/${USER:0:1}/${USER}/LesHouches2013/CMSSW_5_3_9_patch1/src/
 #cd /afs/cern.ch/work/a/amassiro/Generation/CMSSW_5_3_9_patch1/src/
 #cmsenv
 eval `scramv1 runtime -sh`
-
+cd -
 
 echo ">>>  prepare input"
 cmsDriver.py MCDBtoEDM --conditions START53_V7C::All -s NONE --eventcontent RAWSIM --datatier GEN --filein file:/tmp/$TESTFOLDER/$NAMELHEMODIFIED   --fileout /tmp/$TESTFOLDER/$NAMEEDM  -n -1
@@ -85,23 +85,27 @@ cmsDriver.py MCDBtoEDM --conditions START53_V7C::All -s NONE --eventcontent RAWS
 echo ">>>  prepare cfg file for decay"
 
 CFGFILE="POWHEG_PYTHIA6_Tauola_HH_bbWW_lnulnu_withTau_TEMPLATETeV_cff_py_GEN.py"
-NEWCFGFILE="POWHEG_PYTHIA6_Tauola_HH_bbWW_lnulnu_withTau_"$ENERGY"_TeV_"$MODEL"_"$NUMBERSEED"_"$CSI"_cff_py_GEN.py"
+NEWCFGFILE="POWHEG_PYTHIA6_Tauola_HH_bbWW_lnulnu_withTau_${ENERGY}_TeV_${MODEL}_${NUMBERSEED}_${CSI}_cff_py_GEN.py"
 case ${DESTINATIONFOLDER} in
 	"WWbb" )
 		CFGFILE="POWHEG_PYTHIA6_Tauola_HH_bbWW_lnulnu_withTau_TEMPLATETeV_cff_py_GEN.py"
-		NEWCFGFILE="POWHEG_PYTHIA6_Tauola_HH_bbWW_lnulnu_withTau_"$ENERGY"_TeV_"$MODEL"_"$NUMBERSEED"_"$CSI"_cff_py_GEN.py"
-	"ggbb"
+		NEWCFGFILE="POWHEG_PYTHIA6_Tauola_HH_bbWW_lnulnu_withTau_${ENERGY}_TeV_${MODEL}_${NUMBERSEED}_${CSI}_cff_py_GEN.py"
+		;;
+	"ggbb" )
 		CFGFILE="POWHEG_PYTHIA6_Tauola_HH_bbgg_TEMPLATETeV_cff_py_GEN.py"
-		NEWCFGFILE="POWHEG_PYTHIA6_Tauola_HH_bbgg_"$ENERGY"_TeV_"$MODEL"_"$NUMBERSEED"_"$CSI"_cff_py_GEN.py"
+		NEWCFGFILE="POWHEG_PYTHIA6_Tauola_HH_bbgg_${ENERGY}_TeV_${MODEL}_${NUMBERSEED}_${CSI}_cff_py_GEN.py"
+		;;
 esac
 
+echo "CFGFILE= ${CFGFILE}"
+echo "NEWCFGFILE= ${NEWCFGFILE}"
+cp /afs/cern.ch/work/${USER:0:1}/${USER}/LesHouches2013/CMSSW_5_3_9_patch1/src/${CFGFILE} .
 
 cat $CFGFILE | sed -e s%TEMPLATEENERGY%$ENERGY%g | sed -e s%TEMPLATEINPUTFILE%/tmp/$TESTFOLDER/$NAMEEDM%g | sed -e s%TEMPLATEOUTPUTFILE%/tmp/$TESTFOLDER/$NAMEGEN%g > /tmp/$TESTFOLDER/$NEWCFGFILE
 
 cat /tmp/$TESTFOLDER/$NEWCFGFILE
 
 echo ">>> decay and hadronize"
-
 cmsRun /tmp/$TESTFOLDER/$NEWCFGFILE
 
 

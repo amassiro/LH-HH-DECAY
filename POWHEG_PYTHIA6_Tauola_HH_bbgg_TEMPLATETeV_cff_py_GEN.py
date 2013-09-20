@@ -84,7 +84,7 @@ process.generator = cms.EDFilter("Pythia6HadronizerFilter",
     filterEfficiency = cms.untracked.double(1.0),
     pythiaHepMCVerbosity = cms.untracked.bool(False),
     comEnergy = cms.double(TEMPLATEENERGY),
-    maxEventsToPrint = cms.untracked.int32(10),
+    maxEventsToPrint = cms.untracked.int32(0),
     PythiaParameters = cms.PSet(
         pythiaUESettings = cms.vstring('MSTU(21)=1     ! Check on possible errors during program execution', 
             'MSTJ(22)=2     ! Decay those unstable particles', 
