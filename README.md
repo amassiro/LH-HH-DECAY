@@ -43,12 +43,15 @@ Make di-H events decay and hadronize in CMSSW
 </ul>
 
 
-<ul>
-	<li>Alternatively, use Pythia 8</li>
-	<ul>
-		<li>Get Pythia8 from the website (<href a="http://home.thep.lu.se/~torbjorn/pythia8/pythia8180.tgz">tarball for v8.180</href></li>
-		<li>Untar it: "tar -xvzf pythia8180.tgz"</li>
-		<li>Compile: "cd pythia8180/; ./configure; make" (works out of the box on lxplus slc5)</li>
-		<li>TO BE CONTINUED</li>
-	</ul>
-</ul>
+  *Alternatively, use Pythia 8
+	  * Get Pythia8 from the website (http://home.thep.lu.se/~torbjorn/pythia8/pythia8180.tgz)
+		* Untar it:
+		tar -xvzf pythia8180.tgz
+		* Compile:
+		cd pythia8180/
+		./configure
+		make
+		(works out of the box on lxplus slc5)
+		* TO BE CONTINUED
+	
+
