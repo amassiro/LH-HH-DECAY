@@ -44,7 +44,10 @@ Make di-H events decay and hadronize in CMSSW
 
 
 ## Alternatively, use Pythia 8 ##
-* Get Pythia8 from the website
+
+_be sure not to have CMSSW environment loaded for the following operations, it is screwing up librairies for runtime_
+
+* Get [Pythia8](http://home.thep.lu.se/~torbjorn/Pythia.html) from the website
 
 		wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8180.tgz
 		
@@ -56,8 +59,16 @@ Make di-H events decay and hadronize in CMSSW
 
 		cd pythia8180/
 		./configure
-		make
+		make -j 8
 
-* TO BE CONTINUED
+* Go in the examples directory and link our hadronization stuff, and compile it
+
+		cd examples
+		rm Makefile
+		ln -s ../../Makefile .
+		ln -s ../../main00.cc .
+		make main00
 	
+* Hadronize it!
 
+* _TO BE CONTINUED_
