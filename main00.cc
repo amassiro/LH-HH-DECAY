@@ -32,7 +32,7 @@ int main() {
     if(ifile==6) namefile_in += "2500.lhe";
     if(ifile==7) namefile_in += "3000.lhe";
     string namefile_out=namefile_in + ".pythia";
-		namefile_in = "test-MR410.lhe";
+		namefile_in = "test-MR410.lhe.gz";
 //		namefile_in = "ttbar.lhe";
 		namefile_out = "test-MR410_out.lhe";
 
@@ -95,7 +95,7 @@ int main() {
 	// Create an LHAup object that can access relevant information in pythia.
 	LHAupFromPYTHIA8 myLHA(&pythia.process, &pythia.info);
 	// Open a file on which LHEF events should be stored, and write header.
-	myLHA.openLHEF("test.lhe");
+	myLHA.openLHEF("test.lhef");
 	// Store initialization info in the LHAup object.
 	myLHA.setInit();
 	// Write out this initialization info on the file.
@@ -103,7 +103,7 @@ int main() {
 	
 
   // Begin event loop; generate until none left in input file.     
-  for (int iEvent = 0; ; ++iEvent) {
+  for (int iEvent = 0; iEvent < 1000; ++iEvent) {
 
     cout<<"\n ievent = "<<iEvent<<"\n"<<endl;
 

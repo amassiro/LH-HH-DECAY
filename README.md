@@ -55,10 +55,11 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 
 		tar -xvzf pythia8180.tgz
 
-* Compile (works out of the box on lxplus slc5):
+* Compile pythia (works out of the box on lxplus slc5, custom makefiles are needed for linking boost librairies [compulsory for `.lhe.gz` format]):
 
 		cd pythia8180/
-		./configure
+		ln -s ../Makefile_pythia Makefile
+		./configure --enable-gzip --with-boost=/afs/cern.ch/sw/lcg/external/Boost/1.48.0_python2.6/x86_64-slc5-gcc43-opt --with-zlib=/afs/cern.ch/sw/lcg/external/zlib/1.2.5/x86_64-slc5-gcc43-opt/lib
 		make -j 8
 
 * Go in the examples directory and link our hadronization stuff, and compile it
