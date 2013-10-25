@@ -65,7 +65,9 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 * Go in the examples directory and link our hadronization stuff, and compile it
 
 		cd examples
+		rm configure
 		rm Makefile
+		ln -s ../../configure .
 		ln -s ../../Makefile .
 		ln -s ../../main00.cc .
 		make main00

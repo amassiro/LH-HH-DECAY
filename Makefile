@@ -23,7 +23,7 @@ BINDIR=bin
 
 # Libraries to include if GZIP support is enabled
 ifeq (x$(ENABLEGZIP),xyes)
-LIBGZIP=-L$(BOOSTLIBLOCATION) -lboost_iostreams -L$(ZLIBLOCATION) -lz
+LIBGZIP=-L$(BOOSTLIBLOCATION) -lboost_iostreams-gcc43-mt-1_48 -lboost_program_options-gcc43-mt-1_48 -L$(ZLIBLOCATION) -lz
 endif
 
 # There is no default behaviour, so remind user.
