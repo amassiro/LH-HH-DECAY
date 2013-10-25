@@ -335,6 +335,10 @@ if [ "x${ENABLEGZIP}" = "xyes" ]; then
         BOOSTLIBLOCATION=${BOOSTLOCATION}/$i
         break
       fi
+      if [ -f "${BOOSTLOCATION}/$i/libboost_iostreams-gcc46-mt-1_48.${SHAREDSUFFIX}" ]; then
+        BOOSTLIBLOCATION=${BOOSTLOCATION}/$i
+        break
+      fi
     done
 
     if [ "x${ENABLEGZIP}" = "xyes" -a x"${BOOSTLIBLOCATION}" = x ]; then
@@ -351,7 +355,7 @@ if [ "x${ENABLEGZIP}" = "xyes" ]; then
   # Add flags
   if [ "x${ENABLEGZIP}" = "xyes" ] ; then
     echo gzip support is enabled
-    CXXFLAGS="${CXXFLAGS} -DGZIPSUPPORT -I${BOOSTLOCATION}/include/boost-1_48"
+    CXXFLAGS="${CXXFLAGS} -DGZIPSUPPORT -I${BOOSTLOCATION}/include"
   fi
 fi
 
