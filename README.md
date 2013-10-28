@@ -60,7 +60,7 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         cd pythia8180/
         rm configure
         ln -s ../configure
-        ./configure --enable-gzip --with-boost=/afs/cern.ch/sw/lcg/external/Boost/1.48.0_python2.6/x86_64-slc5-gcc43-opt --with-zlib=/afs/cern.ch/sw/lcg/external/zlib/1.2.5/x86_64-slc5-gcc43-opt/lib  --lcgplatform=x86_64-slc5-gcc43-opt  --enable-shared
+        ./configure --enable-gzip --with-boost=/afs/cern.ch/sw/lcg/external/Boost/1.48.0_python2.6/x86_64-slc5-gcc43-opt --with-zlib=/afs/cern.ch/sw/lcg/external/zlib/1.2.5/x86_64-slc5-gcc43-opt/lib  --lcgplatform=x86_64-slc5-gcc43-opt  --enable-shared  --with-hepmc=/afs/cern.ch/sw/lcg/external/HepMC/2.06.08/x86_64-slc5-gcc43-opt --with-hepmcversion=2.06.08
         make -j 8
 
 
@@ -69,7 +69,8 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         cd pythia8180/
         rm configure
         ln -s ../configure
-        ./configure --enable-gzip --with-boost=/afs/cern.ch/sw/lcg/external/Boost/1.48.0_python2.6/x86_64-slc6-gcc46-opt --with-zlib=/afs/cern.ch/sw/lcg/external/zlib/1.2.5/x86_64-slc6-gcc46-opt/lib --lcgplatform=x86_64-slc6-gcc46-opt  --enable-shared
+        ./configure --enable-gzip --with-boost=/afs/cern.ch/sw/lcg/external/Boost/1.48.0_python2.6/x86_64-slc6-gcc46-opt --with-zlib=/afs/cern.ch/sw/lcg/external/zlib/1.2.5/x86_64-slc6-gcc46-opt/lib --lcgplatform=x86_64-slc6-gcc46-opt  --enable-shared  --with-hepmc=/afs/cern.ch/sw/lcg/external/HepMC/2.06.08/x86_64-slc6-gcc46-opt --with-hepmcversion=2.06.08
+        make -j 8
         make -j 8
 
 
@@ -78,6 +79,16 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         cd examples
         ln -s ../../main00.cc .
         make main00
+
+
+  HEPMC dump:
+
+        ln -s ../../Makefile
+        ln -s ../../main99.cc .
+        make main99
+        source config.sh
+        ./main99.exe
+
 
 * Hadronize it!
 
