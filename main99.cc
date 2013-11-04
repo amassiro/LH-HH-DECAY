@@ -22,9 +22,12 @@ int main() {
  
  
  std::string namefile_in=path + "";
-//  namefile_in += "GluGluToHHTo2B2Tau_M-125_8TeV_madgraph_v2.lhe";
- namefile_in += "GluGluToHHTo2B2WToLNuLNu_M-125_14TeV_madgraph_v2.lhe";
- std::string namefile_out=namefile_in + ".pythia";
+ //  namefile_in += "GluGluToHHTo2B2Tau_M-125_8TeV_madgraph_v2.lhe";
+ //  namefile_in += "GluGluToHHTo2B2WToLNuLNu_M-125_14TeV_madgraph_v2.lhe";
+ 
+ namefile_in = "/tmp/amassiro/atEightTeV_events_patched.lhe";
+ 
+ std::string namefile_out;
  namefile_out = "/tmp/amassiro/test-MR410_out.lhe.hepmc";
  
  std::cout<<"\n namefile_in = "<<namefile_in<<std::endl;
@@ -60,27 +63,49 @@ int main() {
  
  
  // Settings
- //  pythia.readString("Tune:preferLHAPDF = off"); // possibly temporary
- pythia.readString("PartonLevel:MI = off"); // Off multiple interactions 
- pythia.readString("PartonLevel:ISR = off");  // Shower on
- pythia.readString("SpaceShower:QEDshowerByQ = off");  // QED off on ISR / quarks irradiate photons
- pythia.readString("SpaceShower:QEDshowerByL = off");  // QED off on ISR / leptons irradiate photons
  
- pythia.readString("PartonLevel:FSR = on");  // Shower on
- pythia.readString("TimeShower:QEDshowerByQ = off");  // QED off on ISR / quarks irradiate photons
- pythia.readString("TimeShower:QEDshowerByL = off");  // QED off on ISR / leptons irradiate photons  
- pythia.readString("TimeShower:QEDshowerByGamma = off");  // Allow photons to branch into lepton or quark pairs  
  
- pythia.readString("HadronLevel:all = off"); // Of hadronization
- pythia.readString("PromptPhoton:all = off"); // Of for the group of all prompt photon processes (is already of by default)
- //  pythia.readString("MultipartonInteractions:Kfactor   (default = 1.0; minimum = 0.5; maximum = 4.0) = off"); // Multiply all cross sections by this fix factor.
+ pythia.readString("HadronLevel:all = on"); // On hadronization
  
- // b quarks do not decays
- //  pythia.readString("5:mayDecay = no");
- //  pythia.readString("-5:mayDecay = no");
+ pythia.readString("25:m0 = 125");
+ pythia.readString("25:onMode = off");
+ pythia.readString("25:onIfMatch = 5 -5"); //bb
  
- // gammas do not decays
- pythia.readString("22:mayDecay = no");
+ pythia.readString("35:m0 = 125");
+ pythia.readString("35:onMode = off");
+ pythia.readString("35:onIfMatch = 24 -24"); //WW
+ 
+ pythia.readString("24:onMode = off");
+ pythia.readString("24:onIfMatch = -11 12"); //W>ev
+ pythia.readString("24:onIfMatch = -13 14"); //W>mv
+ pythia.readString("24:onIfMatch = -15 16"); //W>tv
+ 
+ pythia.readString("-24:onMode = off");
+ pythia.readString("-24:onIfMatch = 11 -12"); //W>ev
+ pythia.readString("-24:onIfMatch = 13 -14"); //W>mv
+ pythia.readString("-24:onIfMatch = 15 -16"); //W>tv
+ 
+ 
+ 
+//  // turn decays
+//  pythia.readString("HadronLevel:all = on"); // generic hadronization settings
+//  // hadronic Higgs decay
+//  pythia.readString("25:onMode = off");
+//  pythia.readString("25:onIfMatch = 5 -5"); // b
+//  pythia.readString("25:onIfMatch = 4 -4"); // c
+//  pythia.readString("25:onIfMatch = 21 21"); // gluon
+//  // WW "higgs" decay
+//  pythia.readString("35:onMode = off");
+//  pythia.readString("35:onIfMatch = 24 -24"); // W
+//  // W decay
+//  pythia.readString("24:onMode = off");
+//  pythia.readString("24:onIfMatch = 12 11"); // e ve
+//  pythia.readString("24:onIfMatch = 14 13"); // mu numu
+//  
+//  pythia.readString("-24:onMode = off");
+//  pythia.readString("-24:onIfMatch = 12 -11"); // e ve
+//  pythia.readString("-24:onIfMatch = 14 -13"); // mu numu
+ 
  
  // Initialization
  pythia.init();      
@@ -88,9 +113,9 @@ int main() {
  // Create an LHAup object that can access relevant information in pythia.
  Pythia8::LHAupFromPYTHIA8 myLHA(&pythia.process, &pythia.info);
  // Open a file on which LHEF events should be stored, and write header.
-
-// Begin event loop; generate until none left in input file.     
- for (int iEvent = 0; iEvent < 10000; ++iEvent) {
+ 
+ // Begin event loop; generate until none left in input file.     
+ for (int iEvent = 0; iEvent < 200; ++iEvent) {
   
   std::cout<<" ievent = " << iEvent << std::endl;
   
@@ -115,6 +140,69 @@ int main() {
   ascii_io << hepmcevt;
   
   delete hepmcevt;
+  
+  
+  
+  std::cout << "Number of particles = " << pythia.event.size() << std::endl;
+  
+  std::vector<int> pID;
+  std::vector<double> px;
+  std::vector<double> py;
+  std::vector<double> pz;
+  std::vector<double> E;
+  std::vector<int> mother;
+  std::vector<int> code;
+  
+  // Some checks on the event record
+  // Check for example that at least we have two bs and two bbars
+  
+  for (int i = 0; i < pythia.event.size(); i++){
+   int particle_id = pythia.event[i].id();
+   int particle_status = pythia.event[i].status();
+   int particle_mother = pythia.event[i].mother1();
+   if (abs(particle_id) == 24 ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
+   if (abs(particle_id) == 5  ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
+   // save only final state particles
+   if(particle_status>0){
+    //  cout<<i<<" "<<particle_id<<" "<<particle_mother<<endl;
+    double ppx= pythia.event[i].px();
+    double ppy= pythia.event[i].py();
+    double ppz= pythia.event[i].pz();
+    double EE= pythia.event[i].e();
+    //cout<<px<<" "<<py<<" "<<pz<<" "<<E<<endl;
+    pID.push_back(particle_id);
+    px.push_back(ppx);
+    py.push_back(ppy);
+    pz.push_back(ppz);
+    E.push_back(EE);
+    mother.push_back(particle_mother);
+    code.push_back(particle_id);
+   }
+  } 
+  
+  for(unsigned i=0;i<E.size();i++){
+   // First of all write the W
+   if(code.at(i)==24){
+    std::cout << " " << px.at(i) << " " << py.at(i) << " " << pz.at(i) << " " << E.at(i) << " " << std::endl;
+    std::cout << px.at(i+1) << " " << py.at(i+1) << " " << pz.at(i+1) << " " << E.at(i+1) << " " << endl;
+   }
+  }
+  
+  //   for(unsigned i=0;i<E.size();i++){
+  //    // First of all write the b quarks
+  //    if(code.at(i)==5 && code.at(i+1)==-5 && mother.at(i)==mother.at(i+1)  ){
+  //     std::cout << " " << px.at(i) << " " << py.at(i) << " " << pz.at(i) << " " << E.at(i) << " " << std::endl;
+  //     std::cout << px.at(i+1) << " " << py.at(i+1) << " " << pz.at(i+1) << " " << E.at(i+1) << " " << endl;
+  //    }
+  //   }
+  //   // Now all the other particles
+  //   for(unsigned i=0;i<E.size();i++){
+  //    // First of all write the b quarks
+  //    if(fabs(code.at(i))<5 || code.at(i)==21){
+  //     std::cout << px.at(i) << " " << py.at(i) << " " << pz.at(i) << " " << E.at(i) << " " << std::endl;
+  //    }
+  //   }
+  
   // End of event loop.        
  }                           
  
