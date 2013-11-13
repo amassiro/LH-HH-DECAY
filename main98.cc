@@ -30,6 +30,11 @@ int main(int argc, char **argv) {
  std::cout << " namefile_in  = " << namefile_in  << std::endl;
  std::cout << " namefile_out = " << namefile_out << std::endl;
 
+ int energy = 13;
+ if (arc >= 4) energy = atoi(argv[3]);
+
+ std::cout << " energy       = " << energy << std::endl;
+
  // output file
  // we want to store the list of all final state particles
  std::ofstream out_pythia;
@@ -42,6 +47,11 @@ int main(int argc, char **argv) {
 
  // Initialize Les Houches Event File run. List initialization information.
  pythia.readString("Beams:frameType = 4");
+
+//  if (energy == 8)  pythia.readString("Beams:frameType = 4");   // 8 TeV
+//  if (energy == 13) pythia.readString("Beams:frameType = 6.5"); // 13 TeV
+//  if (energy == 14) pythia.readString("Beams:frameType = 7");   // 14 TeV
+ 
  // the analysis program
  std::string sfile = "Beams:LHEF ="+namefile_in;
  pythia.readString(sfile.c_str()); 
