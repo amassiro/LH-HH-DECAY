@@ -85,14 +85,36 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 
   HEPMC dump:
 
+  H decay included
+
         ln -s ../../Makefile
         ln -s ../../main99.cc .
         make main99
         source config.sh
         ./main99.exe
 
+  Only hadronization
+
+        ln -s ../../Makefile
+        ln -s ../../main98.cc .
+        make main98
+        source config.sh
+        ./main98.exe   /tmp/amassiro/atEightTeV_events_patched.lhe        /tmp/amassiro/test-MR410_out.lhe.hepmc
+
 
 * Hadronize it!
+
+        SubmitHadronize.py :  a python script that creates bash scripts calling Hadronize.sh to submit to batch system
+        Hadronize.sh  : the actaual script that performs the hadronization
+
+* how to use it:
+
+        python SubmitHadronize.py  model InputFile OutputFile
+
+            model: e.g. ttbar, Wjet, ...
+            InputFile: input lhe file
+            OutputFile: output hepmc file
+
 
 * _TO BE CONTINUED_
 
