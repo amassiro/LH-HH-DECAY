@@ -79,6 +79,8 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         cd examples
         ln -s ../../main00.cc .
         make main00
+        source config.sh
+        ./main00.exe
 
 
   HEPMC dump:

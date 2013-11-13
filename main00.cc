@@ -10,19 +10,24 @@
 
 #include <fstream>
 #include "Pythia8/Pythia.h"
+// #include "Pythia8/Pythia8ToHepMC.h"
+// #include "HepMC/GenEvent.h"
+// #include "HepMC/IO_GenEvent.h"
+
+
 using namespace Pythia8; 
 int main() {
 
   // path to LHE folder
   //unsigned const nfiles=4;
-  string path= "/afs/cern.ch/work/a/aolivei/2HiggsLHC/aabb/signal/Graviton_Parton_LRS3tev_AABB_100K/";
+  string path= "/tmp/amassiro/";
 
   //for(unsigned ifile=0; ifile<8; ifile++){
    unsigned ifile=0;
 
-    string namefile_in=path + "MGraviton_";
+    string namefile_in=path + "";
     //if(ifile==0) namefile_in += "250.lhe";
-    if(ifile==0) namefile_in += "300.lhe";
+    if(ifile==0) namefile_in += "GluGluToHHTo2B2Tau_M-125_8TeV_madgraph_v2.lhe";
     if(ifile==1) namefile_in += "500.lhe";
     if(ifile==2) namefile_in += "700.lhe";
     //if(ifile==3) namefile_in += "750.lhe";
@@ -32,9 +37,9 @@ int main() {
     if(ifile==6) namefile_in += "2500.lhe";
     if(ifile==7) namefile_in += "3000.lhe";
     string namefile_out=namefile_in + ".pythia";
-		namefile_in = "test-MR410.lhe.gz";
+// 		namefile_in = "test-MR410.lhe.gz";
 //		namefile_in = "ttbar.lhe";
-		namefile_out = "test-MR410_out.lhe";
+		namefile_out = "/tmp/amassiro/test-MR410_out.lhe";
 
     cout<<"\n namefile_in = "<<namefile_in<<endl;
     cout<<"\n namefile_out = "<<namefile_out<<endl;
@@ -57,7 +62,12 @@ int main() {
     pythia.readString(sfile.c_str()); 
     out_pythia.open(namefile_out.c_str());
  
-
+    
+    // Interface for conversion from Pythia8::Event to HepMC event. 
+//     HepMC::Pythia8ToHepMC ToHepMC;
+    
+    
+    
   // Allow for possibility of a few faulty events.
   int nAbort = 2;
   int iAbort = 0;
@@ -118,6 +128,13 @@ int main() {
       break;
     }
 
+    // Construct new empty HepMC event and fill it.
+    // Units will be as chosen for HepMC build; but can be changed
+    // by arguments, e.g. GenEvt( HepMC::Units::GEV, HepMC::Units::MM)  
+//     HepMC::GenEvent* hepmcevt = new HepMC::GenEvent();
+//     ToHepMC.fill_next_event( pythia, hepmcevt );
+//     delete hepmcevt;
+    
     // Acess event record
     cout<<"Number of particles = "<<pythia.event.size()<<endl;
     

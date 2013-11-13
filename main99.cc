@@ -60,30 +60,34 @@ int main() {
  int nAbort = 2;
  int iAbort = 0;
  
- 
+ pythia.settings.listAll();
+ pythia.particleData.listAll();
  
  // Settings
  
- 
+//  pythia.readString("SUSY:all = on"); // Load SUSY  --> don't do it
+
  pythia.readString("HadronLevel:all = on"); // On hadronization
  
- pythia.readString("25:m0 = 125");
- pythia.readString("25:onMode = off");
- pythia.readString("25:onIfMatch = 5 -5"); //bb
- 
- pythia.readString("35:m0 = 125");
- pythia.readString("35:onMode = off");
- pythia.readString("35:onIfMatch = 24 -24"); //WW
- 
- pythia.readString("24:onMode = off");
- pythia.readString("24:onIfMatch = -11 12"); //W>ev
- pythia.readString("24:onIfMatch = -13 14"); //W>mv
- pythia.readString("24:onIfMatch = -15 16"); //W>tv
- 
- pythia.readString("-24:onMode = off");
- pythia.readString("-24:onIfMatch = 11 -12"); //W>ev
- pythia.readString("-24:onIfMatch = 13 -14"); //W>mv
- pythia.readString("-24:onIfMatch = 15 -16"); //W>tv
+//  pythia.readString("25:m0 = 125");
+//  pythia.readString("25:onMode = off");
+// //  pythia.readString("25:onIfMatch = 5 -5"); //bb
+//  pythia.readString("25:onIfMatch = 24 -24"); //WW
+//  
+//  pythia.readString("35:m0 = 125");
+//  pythia.readString("35:onMode = off");
+//  pythia.readString("35:onIfMatch = 5 -5"); //bb
+// //  pythia.readString("35:onIfMatch = 24 -24"); //WW
+//  
+//  pythia.readString("24:onMode = off");
+//  pythia.readString("24:onIfMatch = -11 12"); //W>ev
+//  pythia.readString("24:onIfMatch = -13 14"); //W>mv
+//  pythia.readString("24:onIfMatch = -15 16"); //W>tv
+//  
+//  pythia.readString("-24:onMode = off");
+//  pythia.readString("-24:onIfMatch = 11 -12"); //W>ev
+//  pythia.readString("-24:onIfMatch = 13 -14"); //W>mv
+//  pythia.readString("-24:onIfMatch = 15 -16"); //W>tv
  
  
  
@@ -115,9 +119,10 @@ int main() {
  // Open a file on which LHEF events should be stored, and write header.
  
  // Begin event loop; generate until none left in input file.     
- for (int iEvent = 0; iEvent < 200; ++iEvent) {
-  
-  std::cout<<" ievent = " << iEvent << std::endl;
+//  for (int iEvent = 0; iEvent < 200; ++iEvent) {
+ for (int iEvent = 0; iEvent<1000; ++iEvent) {
+   
+  if (!(iEvent%100)) std::cout<<" ievent = " << iEvent << std::endl;
   
   // Generate events, and check whether generation failed.
   if (!pythia.next()) {
@@ -142,8 +147,9 @@ int main() {
   delete hepmcevt;
   
   
+  /*   DEBUG
   
-  std::cout << "Number of particles = " << pythia.event.size() << std::endl;
+//   std::cout << "Number of particles = " << pythia.event.size() << std::endl;
   
   std::vector<int> pID;
   std::vector<double> px;
@@ -160,8 +166,8 @@ int main() {
    int particle_id = pythia.event[i].id();
    int particle_status = pythia.event[i].status();
    int particle_mother = pythia.event[i].mother1();
-   if (abs(particle_id) == 24 ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
-   if (abs(particle_id) == 5  ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
+//    if (abs(particle_id) == 24 ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
+//    if (abs(particle_id) == 5  ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
    // save only final state particles
    if(particle_status>0){
     //  cout<<i<<" "<<particle_id<<" "<<particle_mother<<endl;
@@ -183,8 +189,8 @@ int main() {
   for(unsigned i=0;i<E.size();i++){
    // First of all write the W
    if(code.at(i)==24){
-    std::cout << " " << px.at(i) << " " << py.at(i) << " " << pz.at(i) << " " << E.at(i) << " " << std::endl;
-    std::cout << px.at(i+1) << " " << py.at(i+1) << " " << pz.at(i+1) << " " << E.at(i+1) << " " << endl;
+//     std::cout << " " << px.at(i) << " " << py.at(i) << " " << pz.at(i) << " " << E.at(i) << " " << std::endl;
+//     std::cout << px.at(i+1) << " " << py.at(i+1) << " " << pz.at(i+1) << " " << E.at(i+1) << " " << endl;
    }
   }
   
@@ -202,6 +208,9 @@ int main() {
   //     std::cout << px.at(i) << " " << py.at(i) << " " << pz.at(i) << " " << E.at(i) << " " << std::endl;
   //    }
   //   }
+  
+  */
+  
   
   // End of event loop.        
  }                           
