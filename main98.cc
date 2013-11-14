@@ -45,16 +45,18 @@ int main(int argc, char **argv) {
  // could be inserted with readString or readFile.
  Pythia8::Pythia pythia;
 
- // Initialize Les Houches Event File run. List initialization information.
- pythia.readString("Beams:frameType = 4");
+ //  http://home.thep.lu.se/~torbjorn/pythia81html/BeamParameters.html
+ pythia.readString("Beams:frameType = 1");
+ if (energy == 8)  pythia.readString("Beams:eCM = 8000");   // 8 TeV
+ if (energy == 13) pythia.readString("Beams:frameType = 13000"); // 13 TeV
+ if (energy == 14) pythia.readString("Beams:frameType = 14000");   // 14 TeV
 
-//  if (energy == 8)  pythia.readString("Beams:frameType = 4");   // 8 TeV
-//  if (energy == 13) pythia.readString("Beams:frameType = 6.5"); // 13 TeV
-//  if (energy == 14) pythia.readString("Beams:frameType = 7");   // 14 TeV
- 
+ // Initialize Les Houches Event File run. List initialization information.
  // the analysis program
- std::string sfile = "Beams:LHEF ="+namefile_in;
- pythia.readString(sfile.c_str()); 
+//  pythia.readString("Beams:frameType = 4");
+//  std::string sfile = "Beams:LHEF ="+namefile_in;
+//  pythia.readString(sfile.c_str()); 
+ 
  
  // Interface for conversion from Pythia8::Event to HepMC event. 
  HepMC::Pythia8ToHepMC ToHepMC;
