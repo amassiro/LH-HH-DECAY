@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
  std::cout << " namefile_out = " << namefile_out << std::endl;
 
  int energy = 13;
- if (arc >= 4) energy = atoi(argv[3]);
+ if (argc >= 4) energy = atoi(argv[3]);
 
  std::cout << " energy       = " << energy << std::endl;
 
