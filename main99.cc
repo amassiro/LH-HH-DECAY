@@ -24,16 +24,15 @@ int main() {
  std::string namefile_in=path + "";
  //  namefile_in += "GluGluToHHTo2B2Tau_M-125_8TeV_madgraph_v2.lhe";
  //  namefile_in += "GluGluToHHTo2B2WToLNuLNu_M-125_14TeV_madgraph_v2.lhe";
- 
+
  namefile_in = "/tmp/amassiro/atEightTeV_events_patched.lhe";
- 
+
  std::string namefile_out;
  namefile_out = "/tmp/amassiro/test-MR410_out.lhe.hepmc";
- 
+
  std::cout<<"\n namefile_in = "<<namefile_in<<std::endl;
  std::cout<<"\n namefile_out = "<<namefile_out<<std::endl;
- 
- 
+
  // output file
  // we want to store the list of all final state particles
  std::ofstream out_pythia;
@@ -60,8 +59,8 @@ int main() {
  int nAbort = 2;
  int iAbort = 0;
  
- pythia.settings.listAll();
- pythia.particleData.listAll();
+//  pythia.settings.listAll();
+//  pythia.particleData.listAll();
  
  // Settings
  
@@ -119,7 +118,7 @@ int main() {
  // Open a file on which LHEF events should be stored, and write header.
  
  // Begin event loop; generate until none left in input file.     
- for (int iEvent = 0; iEvent < 200; ++iEvent) {
+ for (int iEvent = 0; iEvent < 100; ++iEvent) {
   
   std::cout<<" ievent = " << iEvent << std::endl;
   

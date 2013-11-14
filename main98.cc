@@ -46,33 +46,35 @@ int main(int argc, char **argv) {
  Pythia8::Pythia pythia;
 
  //  http://home.thep.lu.se/~torbjorn/pythia81html/BeamParameters.html
- pythia.readString("Beams:frameType = 1");
- if (energy == 8)  pythia.readString("Beams:eCM = 8000");   // 8 TeV
- if (energy == 13) pythia.readString("Beams:frameType = 13000"); // 13 TeV
- if (energy == 14) pythia.readString("Beams:frameType = 14000");   // 14 TeV
+//  pythia.readString("Beams:frameType = 1");
+//  if (energy == 8)  pythia.readString("Beams:eCM = 8000");   // 8 TeV
+//  if (energy == 13) pythia.readString("Beams:eCM = 13000"); // 13 TeV
+//  if (energy == 14) pythia.readString("Beams:eCM = 14000");   // 14 TeV
 
  // Initialize Les Houches Event File run. List initialization information.
  // the analysis program
-//  pythia.readString("Beams:frameType = 4");
-//  std::string sfile = "Beams:LHEF ="+namefile_in;
-//  pythia.readString(sfile.c_str()); 
- 
- 
+ pythia.readString("Beams:frameType = 4");
+ std::string sfile = "Beams:LHEF ="+namefile_in;
+ pythia.readString(sfile.c_str()); 
+
+
  // Interface for conversion from Pythia8::Event to HepMC event. 
  HepMC::Pythia8ToHepMC ToHepMC;
- 
+
  // Specify file where HepMC events will be stored.
  HepMC::IO_GenEvent ascii_io(namefile_out.c_str(), std::ios::out);
- 
+
  // Allow for possibility of a few faulty events.
- int nAbort = 2;
+ int nAbort = 10;
  int iAbort = 0;
- 
- pythia.settings.listAll();
- pythia.particleData.listAll();
- 
+
+//  pythia.settings.listAll();
+//  pythia.particleData.listAll();
+
  // Settings
- pythia.readString("HadronLevel:all = on"); // On hadronization
+//  pythia.readString("ProcessLevel:all = off"); // Off event generation -> need on for MPI
+ pythia.readString("HadronLevel:all  = on"); // On hadronization
+
 
  // Initialization
  pythia.init();
@@ -84,37 +86,39 @@ int main(int argc, char **argv) {
  // Begin event loop; generate until none left in input file.
 //  for (int iEvent = 0; iEvent < 200; ++iEvent) {
  for (int iEvent = 0; ; ++iEvent) {
-   
+
   if (!(iEvent%100)) std::cout<<" ievent = " << iEvent << std::endl;
-  
+
   // Generate events, and check whether generation failed.
   if (!pythia.next()) {
-   
+
    // If failure because reached end of file then exit event loop.
    if (pythia.info.atEndOfFile()) break; 
-   
+
    // First few failures write off as "acceptable" errors, then quit.
    if (++iAbort < nAbort) continue;
    break;
   }
-  
+
   // Construct new empty HepMC event and fill it.
   // Units will be as chosen for HepMC build; but can be changed
   // by arguments, e.g. GenEvt( HepMC::Units::GEV, HepMC::Units::MM)  
   HepMC::GenEvent* hepmcevt = new HepMC::GenEvent();
   ToHepMC.fill_next_event( pythia, hepmcevt );
-  
+
   // Write the HepMC event to file. Done with it.
   ascii_io << hepmcevt;
-  
+
   delete hepmcevt;
-  // End of event loop.        
- }                           
- 
+  // End of event loop.
+ }
+
  // Give statistics. Print histogram.
  pythia.stat();
- 
+
  //delete pythia;
- 
+
  return 0;
 }
+
+

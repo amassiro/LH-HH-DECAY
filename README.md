@@ -109,12 +109,15 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 
 * how to use it:
 
-        python SubmitHadronize.py  model InputFile OutputFile
+        python SubmitHadronize.py  model  InputFolder  InputFile  OutputFolder  OutputFile
 
             model: e.g. ttbar, Wjet, ...
             InputFile: input lhe file
             OutputFile: output hepmc file
 
+  example:
+
+        python SubmitHadronize.py  ttbar     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc
 
 * _TO BE CONTINUED_
 
