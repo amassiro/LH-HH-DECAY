@@ -50,12 +50,21 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 * Get [Pythia8](http://home.thep.lu.se/~torbjorn/Pythia.html) from the website
 
         wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8180.tgz
+        wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8176.tgz
+        wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8153.tgz   -> as in CMS
 
 * Untar it:
 
         tar -xvzf pythia8180.tgz
+        tar -xvzf pythia8176.tgz
+        tar -xvzf pythia8153.tgz     -> as in CMS
+
 
 * Compile pythia (works out of the box on lxplus *slc5*, custom makefiles are needed for linking boost librairies [compulsory for `.lhe.gz` format]):
+
+        cd pythia8153/
+        ./configure --enable-gzip  --with-hepmcversion=2.06.08
+        make -j 8
 
         cd pythia8180/
         rm configure
@@ -70,7 +79,6 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         rm configure
         ln -s ../configure
         ./configure --enable-gzip --with-boost=/afs/cern.ch/sw/lcg/external/Boost/1.48.0_python2.6/x86_64-slc6-gcc46-opt --with-zlib=/afs/cern.ch/sw/lcg/external/zlib/1.2.5/x86_64-slc6-gcc46-opt/lib --lcgplatform=x86_64-slc6-gcc46-opt  --enable-shared  --with-hepmc=/afs/cern.ch/sw/lcg/external/HepMC/2.06.08/x86_64-slc6-gcc46-opt --with-hepmcversion=2.06.08
-        make -j 8
         make -j 8
 
 
@@ -100,6 +108,8 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         make main98
         source config.sh
         ./main98.exe   /tmp/amassiro/atEightTeV_events_patched.lhe        /tmp/amassiro/test-MR410_out.lhe.hepmc
+        ./main98.exe   /tmp/amassiro/TT_CT10_13TeV-powheg.lhe             /tmp/amassiro/test-ttbar.lhe.hepmc
+
 
 
 * Hadronize it!

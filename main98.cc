@@ -9,8 +9,12 @@
 
 
 #include <fstream>
-#include "Pythia8/Pythia.h"
-#include "Pythia8/Pythia8ToHepMC.h"
+// #include "Pythia8/Pythia.h"
+// #include "Pythia8/Pythia8ToHepMC.h"
+
+#include "Pythia.h"
+#include "HepMCInterface.h"
+
 #include "HepMC/GenEvent.h"
 #include "HepMC/IO_GenEvent.h"
 
@@ -59,7 +63,8 @@ int main(int argc, char **argv) {
 
 
  // Interface for conversion from Pythia8::Event to HepMC event. 
- HepMC::Pythia8ToHepMC ToHepMC;
+ HepMC::I_Pythia8 ToHepMC;
+//  HepMC::Pythia8ToHepMC ToHepMC;
 
  // Specify file where HepMC events will be stored.
  HepMC::IO_GenEvent ascii_io(namefile_out.c_str(), std::ios::out);
@@ -85,7 +90,7 @@ int main(int argc, char **argv) {
 
  // Begin event loop; generate until none left in input file.
 //  for (int iEvent = 0; iEvent < 200; ++iEvent) {
- for (int iEvent = 0; ; ++iEvent) {
+ for (int iEvent = 0; iEvent < 10000; ++iEvent) {
 
   if (!(iEvent%100)) std::cout<<" ievent = " << iEvent << std::endl;
 
@@ -110,11 +115,24 @@ int main(int argc, char **argv) {
   ascii_io << hepmcevt;
 
   delete hepmcevt;
+  
+  
+  std::cout << "Number of particles = " << pythia.event.size() << std::endl;
+  // Some checks on the event record
+  // Check for example that at least we have two bs and two bbars
+  for (int i = 0; i < pythia.event.size(); i++){
+   int particle_id = pythia.event[i].id();
+   int particle_status = pythia.event[i].status();
+   int particle_mother = pythia.event[i].mother1();
+   if (abs(particle_id) == 11 || abs(particle_id) == 13 ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
+  } 
+  
+  
   // End of event loop.
  }
 
  // Give statistics. Print histogram.
- pythia.stat();
+//  pythia.stat();
 
  //delete pythia;
 

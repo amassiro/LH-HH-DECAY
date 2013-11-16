@@ -23,8 +23,8 @@ if len(sys.argv) == 1:
 
 command = '#!/bin/bash\n\
            cd {PWD}\n\
-           ./Hadronize.sh {INPUTFILE} {INPUTFOLDER} {OUTPUTFOLDER} {OUTPUTFILE} {MODEL}\n \
-           '.format(PWD=wd, INPUTFOLDER=InputFolder, INPUTFILE=InputFile, OUTPUTFOLDER=OutputFolder, OUTPUTFILE=OutputFile, MODEL=model).replace('  ','')
+           ./Hadronize.sh {MODEL} {INPUTFILE} {INPUTFOLDER} {OUTPUTFOLDER} {OUTPUTFILE}\n \
+           '.format(PWD=wd, MODEL=model, INPUTFOLDER=InputFolder, INPUTFILE=InputFile, OUTPUTFOLDER=OutputFolder, OUTPUTFILE=OutputFile).replace('  ','')
 
 fname = '/'.join([wd,newfol,'sub_'+model+'.sh'])
 f1    = open(fname, 'w+')
