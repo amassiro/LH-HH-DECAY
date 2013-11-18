@@ -9,8 +9,11 @@
 
 
 #include <fstream>
-#include "Pythia8/Pythia.h"
-#include "Pythia8/Pythia8ToHepMC.h"
+// #include "Pythia8/Pythia.h"
+// #include "Pythia8/Pythia8ToHepMC.h"
+#include "Pythia.h"
+#include "HepMCInterface.h"
+
 #include "HepMC/GenEvent.h"
 #include "HepMC/IO_GenEvent.h"
 
@@ -50,8 +53,8 @@ int main() {
  pythia.readString(sfile.c_str()); 
  
  // Interface for conversion from Pythia8::Event to HepMC event. 
- HepMC::Pythia8ToHepMC ToHepMC;
- 
+ HepMC::I_Pythia8 ToHepMC;
+
  // Specify file where HepMC events will be stored.
  HepMC::IO_GenEvent ascii_io(namefile_out.c_str(), std::ios::out);
  
@@ -68,25 +71,38 @@ int main() {
 
  pythia.readString("HadronLevel:all = on"); // On hadronization
  
+ // read decay table
+ pythia.readString("SLHA:readFrom = 2");
+ pythia.readString("SLHA:file = Susy.txt "); // input the decay table
+ // allow overwrite: only works for products of SM - like decays
+ pythia.readString("SLHA:allowUserOverride = on ");
+
+ pythia.readString("24:onMode = off");
+ pythia.readString("-24:onMode = off");
+ pythia.readString("24:onIfMatch = 12 11"); // e ve
+ pythia.readString("24:onIfMatch = 14 13"); // mu numu
+ pythia.readString("-24:onIfMatch = 12 -11"); // e ve
+ pythia.readString("-24:onIfMatch = 14 -13"); // mu numu
+
  pythia.readString("25:m0 = 125");
  pythia.readString("25:onMode = off");
-//  pythia.readString("25:onIfMatch = 5 -5"); //bb
- pythia.readString("25:onIfMatch = 24 -24"); //WW
+ pythia.readString("25:onIfMatch = 5 -5"); //bb
+//  pythia.readString("25:onIfMatch = 24 -24"); //WW
  
  pythia.readString("35:m0 = 125");
- pythia.readString("35:onMode = off");
- pythia.readString("35:onIfMatch = 5 -5"); //bb
+//  pythia.readString("35:onMode = off");
+//  pythia.readString("35:onIfMatch = 5 -5"); //bb
 //  pythia.readString("35:onIfMatch = 24 -24"); //WW
  
- pythia.readString("24:onMode = off");
- pythia.readString("24:onIfMatch = -11 12"); //W>ev
- pythia.readString("24:onIfMatch = -13 14"); //W>mv
- pythia.readString("24:onIfMatch = -15 16"); //W>tv
- 
- pythia.readString("-24:onMode = off");
- pythia.readString("-24:onIfMatch = 11 -12"); //W>ev
- pythia.readString("-24:onIfMatch = 13 -14"); //W>mv
- pythia.readString("-24:onIfMatch = 15 -16"); //W>tv
+//  pythia.readString("24:onMode = off");
+//  pythia.readString("24:onIfMatch = -11 12"); //W>ev
+//  pythia.readString("24:onIfMatch = -13 14"); //W>mv
+//  pythia.readString("24:onIfMatch = -15 16"); //W>tv
+//  
+//  pythia.readString("-24:onMode = off");
+//  pythia.readString("-24:onIfMatch = 11 -12"); //W>ev
+//  pythia.readString("-24:onIfMatch = 13 -14"); //W>mv
+//  pythia.readString("-24:onIfMatch = 15 -16"); //W>tv
  
  
  
@@ -136,7 +152,8 @@ int main() {
   // Construct new empty HepMC event and fill it.
   // Units will be as chosen for HepMC build; but can be changed
   // by arguments, e.g. GenEvt( HepMC::Units::GEV, HepMC::Units::MM)  
-  HepMC::GenEvent* hepmcevt = new HepMC::GenEvent();
+//   HepMC::GenEvent* hepmcevt = new HepMC::GenEvent();
+  HepMC::GenEvent* hepmcevt = new HepMC::GenEvent(HepMC::Units::GEV, HepMC::Units::MM);
   ToHepMC.fill_next_event( pythia, hepmcevt );
   
   // Write the HepMC event to file. Done with it.
@@ -163,6 +180,8 @@ int main() {
    int particle_id = pythia.event[i].id();
    int particle_status = pythia.event[i].status();
    int particle_mother = pythia.event[i].mother1();
+   if (abs(particle_id) == 11 ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
+   if (abs(particle_id) == 13 ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
    if (abs(particle_id) == 24 ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
    if (abs(particle_id) == 5  ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
    // save only final state particles
@@ -210,7 +229,7 @@ int main() {
  }                           
  
  // Give statistics. Print histogram.
- pythia.stat();
+//  pythia.stat();
  
  //delete pythia;
  

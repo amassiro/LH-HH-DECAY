@@ -30,13 +30,14 @@ endif
 all:
 	@echo "Usage: for NN = example number: make mainNN"
 
+
 # Create an executable for one of the normal test programs
 main99: \
-	$(PYTHIA8LOCATION)/$(LIBDIRARCH)/libpythia8.a $(PYTHIA8LOCATION)/$(LIBDIRARCH)/libpythia8tohepmc.a
+	$(PYTHIA8LOCATION)/$(LIBDIRARCH)/libpythia8.a $(PYTHIA8LOCATION)/$(LIBDIRARCH)/libhepmcinterface.a
 	@mkdir -p $(BINDIR)
 	$(CXX) $(CXXFLAGS) -I$(PYTHIA8LOCATION)/$(INCDIR) -I$(HEPMCLOCATION)/include $@.cc -o $(BINDIR)/$@.exe \
 	-L$(PYTHIA8LOCATION)/$(LIBDIRARCH) -lpythia8 -llhapdfdummy $(LIBGZIP) \
-	-lpythia8tohepmc \
+	-lhepmcinterface \
 	-L$(HEPMCLOCATION)/lib -lHepMC
 	@ln -fs $(BINDIR)/$@.exe $@.exe
 

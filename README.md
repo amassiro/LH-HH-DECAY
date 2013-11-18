@@ -64,6 +64,7 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 
         cd pythia8153/
         ./configure --enable-gzip  --with-hepmcversion=2.06.08
+        ./configure --enable-gzip  --with-hepmcversion=2.04.02
         make -j 8
 
         cd pythia8180/

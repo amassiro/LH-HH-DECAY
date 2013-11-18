@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
 
  // Begin event loop; generate until none left in input file.
 //  for (int iEvent = 0; iEvent < 200; ++iEvent) {
- for (int iEvent = 0; iEvent < 10000; ++iEvent) {
+ for (int iEvent = 0; iEvent < 1000; ++iEvent) {
 
   if (!(iEvent%100)) std::cout<<" ievent = " << iEvent << std::endl;
 
@@ -108,7 +108,8 @@ int main(int argc, char **argv) {
   // Construct new empty HepMC event and fill it.
   // Units will be as chosen for HepMC build; but can be changed
   // by arguments, e.g. GenEvt( HepMC::Units::GEV, HepMC::Units::MM)  
-  HepMC::GenEvent* hepmcevt = new HepMC::GenEvent();
+//   HepMC::GenEvent* hepmcevt = new HepMC::GenEvent();
+  HepMC::GenEvent* hepmcevt = new HepMC::GenEvent(HepMC::Units::GEV, HepMC::Units::MM);
   ToHepMC.fill_next_event( pythia, hepmcevt );
 
   // Write the HepMC event to file. Done with it.
@@ -117,15 +118,15 @@ int main(int argc, char **argv) {
   delete hepmcevt;
   
   
-  std::cout << "Number of particles = " << pythia.event.size() << std::endl;
-  // Some checks on the event record
-  // Check for example that at least we have two bs and two bbars
-  for (int i = 0; i < pythia.event.size(); i++){
-   int particle_id = pythia.event[i].id();
-   int particle_status = pythia.event[i].status();
-   int particle_mother = pythia.event[i].mother1();
-   if (abs(particle_id) == 11 || abs(particle_id) == 13 ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
-  } 
+//   std::cout << "Number of particles = " << pythia.event.size() << std::endl;
+//   // Some checks on the event record
+//   // Check for example that at least we have two bs and two bbars
+//   for (int i = 0; i < pythia.event.size(); i++){
+//    int particle_id = pythia.event[i].id();
+//    int particle_status = pythia.event[i].status();
+//    int particle_mother = pythia.event[i].mother1();
+//    if (abs(particle_id) == 11 || abs(particle_id) == 13 ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
+//   } 
   
   
   // End of event loop.
