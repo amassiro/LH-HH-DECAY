@@ -69,7 +69,7 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 
 # HEPMC dump:
 
- * H decay included
+ * H decay included "main99"
 
         ln -s ../../Makefile
         ln -s ../../main99.cc .
@@ -77,7 +77,7 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         source config.sh
         ./main99.exe     input.lhe    output.hepmc       decay.txt
 
- * Only hadronization
+ * Only hadronization "main98"
 
         ln -s ../../Makefile
         ln -s ../../main98.cc
@@ -86,7 +86,7 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         ./main98.exe   input.lhe     output.hepmc
 
         ./main98.exe   /tmp/amassiro/atEightTeV_events_patched.lhe        /tmp/amassiro/test-MR410_out.lhe.hepmc
-        ./main98.exe   /tmp/amassiro/TT_CT10_13TeV-powheg.lhe             /tmp/amassiro/test-ttbar.lhe.hepmc
+        ./main98.exe   /tmp/amassiro/TT_CT10_13TeV-powheg-reduced.lhe     /tmp/amassiro/test-ttbar.lhe.hepmc
 
 
 * Hadronize it!
@@ -94,9 +94,14 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         SubmitHadronize.py :  a python script that creates bash scripts calling Hadronize.sh to submit to batch system
         Hadronize.sh  : the actaual script that performs the hadronization
 
+        Using CMSSW interface
+        SubmitHadronizePythia8.py :  a python script that creates bash scripts calling Hadronize.sh to submit to batch system
+        HadronizePythia8.sh  : the actaual script that performs the hadronization
+
 * how to use it:
 
-        python SubmitHadronize.py  model  InputFolder  InputFile  OutputFolder  OutputFile
+        python SubmitHadronize.py         model  InputFolder  InputFile  OutputFolder  OutputFile
+        python SubmitHadronizePythia8.py  model  InputFolder  InputFile  OutputFolder  OutputFile
 
             model: e.g. ttbar, Wjet, ...
             InputFile: input lhe file
@@ -104,7 +109,7 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 
   example:
 
-        python SubmitHadronize.py  ttbar     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc
+        python SubmitHadronizePythia8.py  ttbar     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc
 
 
 
