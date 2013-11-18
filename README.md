@@ -112,5 +112,9 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         python SubmitHadronizePythia8.py  ttbar     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc
 
 
+  to run Higgs decay on batch system (NB Center of mass energy is taken from LHE file by Pythia8!):
+        ./SubmitDecayAndHadronizePythia8.py    MAXITER    CASTORFOLDER                                  MODEL    ENERGY     CSI      DESTINATIONFOLDER
+        ./SubmitDecayAndHadronizePythia8.py     1    /castor/cern.ch/user/a/amassiro/HHLHE-SO5-11Sep      SO5      13         10       WWbb
+
 
 
