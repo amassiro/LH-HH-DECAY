@@ -1,0 +1,199 @@
+# ISAJET SUSY parameters in SUSY Les Houches Accord 2 format
+# Created by ISALHA 2.0 Last revision: C. Balazs 21 Apr 2009
+Block SPINFO # Program information
+     1 ISASUGRA from ISAJET # Spectrum Calculator
+     2 7.80 29-OCT-2009 12:50:36 # Version number
+Block MODSEL # Model selection
+     1 13 # Non-universal supergravity model
+Block SMINPUTS # Standard Model inputs
+     1 1.27836243E+02 # alpha_em^(-1)
+     2 1.16570000E-05 # G_Fermi
+     3 1.17200002E-01 # alpha_s(M_Z)
+     4 9.11699982E+01 # m_{Z}(pole)
+     5 4.19999981E+00 # m_{b}(m_{b})
+     6 1.72500000E+02 # m_{top}(pole)
+     7 1.77699995E+00 # m_{tau}(pole)
+Block MINPAR # SUSY breaking input parameters
+     1 1.25000000E+02 # m_0
+     2 5.00000000E+03 # m_{1/2}
+     3 1.04999995E+00 # tan(beta)
+     4 1.00000000E+00 # sign(mu)
+     5 0.00000000E+00 # A_0
+Block EXTPAR # Non-universal SUSY breaking parameters
+     0 1.00000000E+04 # Input scale
+    21 -1.21530960E+07 # Down type Higgs mass squared
+    22 -1.21524730E+07 # Up type Higgs mass squared
+     1 0.00000000E+00 # U(1)_Y gaugino (Bino) mass
+     2 5.00000000E+03 # SU(2)_L gaugino (Wino) mass
+     3 5.00000000E+02 # SU(3)_C gaugino (gluino) mass
+    34 5.00000000E+03 # Right scalar electron mass
+    31 5.00000000E+03 # Left 1st gen. slepton mass
+    47 5.00000000E+02 # Right scalar down mass
+    44 5.00000000E+02 # Right scalar up mass
+    41 5.00000000E+02 # Left 1st gen. squark mass
+    36 5.00000000E+03 # Right scalar tau mass
+    33 5.00000000E+03 # Left 3rd gen. slepton mass
+    49 5.00000000E+03 # Right scalar bottom mass
+    46 5.00000000E+03 # Right scalar top mass
+    43 5.00000000E+03 # Left 3rd gen. squark mass
+Block MASS # Scalar and gaugino mass spectrum
+# PDG code mass particle
+        24 8.04229965E+01 # W^+
+        25 1.25000000E+02 # h^0
+        35 1.25000000E+02 # H^0
+        36 5.00000000e+03 # A^0
+        37 5.00000000e+03 # H^+
+ Block ALPHA # Effective Higgs mixing parameter
+         -7.61225343E-01 # alpha
+Block STOPMIX # stop mixing matrix
+  1 1 4.11578804E-01 # O_{11}
+  1 2 9.11374152E-01 # O_{12}
+  2 1 -9.11374152E-01 # O_{21}
+  2 2 4.11578804E-01 # O_{22}
+Block SBOTMIX # sbottom mixing matrix
+  1 1 7.21292436E-01 # O_{11}
+  1 2 6.92630649E-01 # O_{12}
+  2 1 -6.92630649E-01 # O_{21}
+  2 2 7.21292436E-01 # O_{22}
+Block STAUMIX # stau mixing matrix
+  1 1 1.15967337E-02 # O_{11}
+  1 2 9.99932766E-01 # O_{12}
+  2 1 -9.99932766E-01 # O_{21}
+  2 2 1.15967337E-02 # O_{22}
+Block NMIX # neutralino mixing matrix
+  1 1 9.99965727E-01 #
+  1 2 6.19883998E-04 #
+  1 3 5.98469656E-03 #
+  1 4 -5.69890067E-03 #
+  2 1 -3.05461744E-03 #
+  2 2 -8.99356544E-01 #
+  2 3 3.09205741E-01 #
+  2 4 -3.09095919E-01 #
+  3 1 -2.02044539E-04 #
+  3 2 8.11236241E-05 #
+  3 3 7.07098126E-01 #
+  3 4 7.07115471E-01 #
+  4 1 -7.70109193E-03 #
+  4 2 4.37215477E-01 #
+  4 3 6.35899603E-01 #
+  4 4 -6.35936439E-01 #
+Block UMIX # chargino U mixing matrix
+  1 1 -8.51988018E-01 # U_{11}
+  1 2 5.23561239E-01 # U_{12}
+  2 1 -5.23561239E-01 # U_{21}
+  2 2 -8.51988018E-01 # U_{22}
+Block VMIX # chargino V mixing matrix
+  1 1 -8.51987004E-01 # V_{11}
+  1 2 5.23562908E-01 # V_{12}
+  2 1 -5.23562908E-01 # V_{21}
+  2 2 -8.51987004E-01 # V_{22}
+Block GAUGE Q= 4.95367969E+03 #
+     1 3.57524991E-01 # g`
+     2 6.52378619E-01 # g_2
+     3 1.21928000E+00 # g_3
+Block YU Q= 4.95367969E+03 #
+  3 3 1.11666286E+00 # y_t
+Block YD Q= 4.95367969E+03 #
+  3 3 1.78913847E-02 # y_b
+Block YE Q= 4.95367969E+03 #
+  3 3 1.46171292E-02 # y_tau
+Block HMIX Q= 4.95367969E+03 # Higgs mixing parameters
+     1 5.00000000E+03 # mu(Q)
+     2 1.04999995E+00 # tan(beta)(M_GUT)
+     3 2.52928284E+02 # Higgs vev at Q
+     4 2.50000000E+07 # m_A^2(Q)
+Block MSOFT Q= 4.95367969E+03 # DRbar SUSY breaking parameters
+     1 -2.49941841E-01 # M_1(Q)
+     2 4.97828369E+03 # M_2(Q)
+     3 5.71167542E+02 # M_3(Q)
+    31 5.02573047E+03 # MeL(Q)
+    32 5.02573047E+03 # MmuL(Q)
+    33 5.02622510E+03 # MtauL(Q)
+    34 4.99976221E+03 # MeR(Q)
+    35 4.99976221E+03 # MmuR(Q)
+    36 4.99974414E+03 # MtauR(Q)
+    41 1.03033508E+03 # MqL1(Q)
+    42 1.03033508E+03 # MqL2(Q)
+    43 4.98691504E+03 # MqL3(Q)
+    44 4.90182617E+02 # MuR(Q)
+    45 4.90182617E+02 # McR(Q)
+    46 4.92066553E+03 # MtR(Q)
+    47 4.83325043E+02 # MdR(Q)
+    48 4.83325043E+02 # MsR(Q)
+    49 4.99957080E+03 # MbR(Q)
+Block AU Q= 4.95367969E+03 #
+  1 1 -7.30358887E+01 # A_u
+  2 2 -7.30358887E+01 # A_c
+  3 3 -7.30358887E+01 # A_t
+Block AD Q= 4.95367969E+03 #
+  1 1 -7.64760590E+01 # A_d
+  2 2 -7.64760590E+01 # A_s
+  3 3 -7.64760590E+01 # A_b
+Block AE Q= 4.95367969E+03 #
+  1 1 -5.29883537E+01 # A_e
+  2 2 -5.29883537E+01 # A_mu
+  3 3 -5.29883537E+01 # A_tau
+# ISAJET decay tables in SUSY Les Houches accord format
+# Created by ISALHD. Last revision: C. Balazs, 2005 May 25
+Block DCINFO # Program information
+     1 ISASUGRA from ISAJET # Spectrum Calculator
+     2 7.80 29-OCT-2009 12:50:36 # Version number
+# PDG Width
+DECAY 6 1.14680767E+00 # TP decays
+# BR NDA ID1 ID2 ID3 ID4
+      3.33333343E-01 3 2 -1 5 # TP --> UP DB BT
+      3.33333343E-01 3 4 -3 5 # TP --> CH SB BT
+      1.11111112E-01 3 -11 12 5 # TP --> E+ NUE BT
+      1.11111112E-01 3 -13 14 5 # TP --> MU+ NUM BT
+      1.11111112E-01 3 -15 16 5 # TP --> TAU+ NUT BT
+# PDG Width
+
+DECAY 25 2.66789529E-03 # HL0 decays
+# BR NDA ID1 ID2 ID3 ID4
+# 6.23677397E-06 2 1 -1 # HL0 --> DN DB
+# 2.51996471E-03 2 3 -3 # HL0 --> ST SB
+# 8.72675657E-01 2 5 -5 # HL0 --> BT BB
+# 1.99386864E-06 2 2 -2 # HL0 --> UP UB
+# 3.99496369E-02 2 4 -4 # HL0 --> CH CB
+      1.86399519E-01 2 24 -24 # HL0 --> w+ w-
+# PDG Width
+DECAY 35 1.86496292E+02 # HH0 decays
+# BR NDA ID1 ID2 ID3 ID4
+#      6.23677397E-06 2 1 -1 # HL0 --> DN DB
+#      2.51996471E-03 2 3 -3 # HL0 --> ST SB
+#      8.72675657E-01 2 5 -5 # HL0 --> BT BB
+#      1.99386864E-06 2 2 -2 # HL0 --> UP UB
+#      3.99496369E-02 2 4 -4 # HL0 --> CH CB
+#      1.86399519E-02 2 21 21 # HL0 --> GL GL
+      1.000000000     2 5 -5 # HL0 --> BT BB
+# PDG Width
+DECAY 36 1.85878326E+02 # HA0 decays
+# BR NDA ID1 ID2 ID3 ID4
+      5.03979801E-12 2 11 -11 # HA0 --> E- E+
+      2.12789345E-07 2 13 -13 # HA0 --> MU- MU+
+      6.09461167E-05 2 15 -15 # HA0 --> TAU- TAU+
+      6.10336537E-09 2 1 -1 # HA0 --> DN DB
+      2.46606760E-06 2 3 -3 # HA0 --> ST SB
+      5.10524609E-04 2 5 -5 # HA0 --> BT BB
+      1.60663538E-09 2 2 -2 # HA0 --> UP UB
+      1.89936236E-05 2 4 -4 # HA0 --> CH CB
+      9.99167264E-01 2 6 -6 # HA0 --> TP TB
+      9.46584464E-07 2 22 22 # HA0 --> GM GM
+      1.08037646E-04 2 21 21 # HA0 --> GL GL
+      5.35020672E-06 2 1000022 1000022 # HA0 --> Z1SS Z1SS
+      1.77461679E-05 2 1000022 1000023 # HA0 --> Z1SS Z2SS
+      9.96990002E-06 2 25 23 # HA0 --> HL0 Z0
+      8.20860546E-10 2 1000002 -2000002 # HA0 --> UPL UBR
+      8.20860546E-10 2 2000002 -1000002 # HA0 --> UPR UBL
+      4.77046669E-05 2 1000004 -2000004 # HA0 --> CHL CBR
+      4.77046669E-05 2 2000004 -1000004 # HA0 --> CHR CBL
+      2.56540922E-09 2 1000001 -2000001 # HA0 --> DNL DBR
+      2.56540922E-09 2 2000001 -1000001 # HA0 --> DNR DBL
+      1.03655520E-06 2 1000003 -2000003 # HA0 --> STL SBR
+      1.03655520E-06 2 2000003 -1000003 # HA0 --> STR SBL
+# PDG Width
+DECAY 37 1.73677628E+02 # H+ decays
+# BR NDA ID1 ID2 ID3 ID4
+      3.3337114E-12 2 12 -11 # H+ --> NUE E+
+      3.33363165E-07 2 14 -13 # H+ --> NUM MU+
+      3.33344697E-05 2 16 -15 # H+ --> NUT TAU+ 
