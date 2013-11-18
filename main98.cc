@@ -90,9 +90,9 @@ int main(int argc, char **argv) {
 
  // Begin event loop; generate until none left in input file.
 //  for (int iEvent = 0; iEvent < 200; ++iEvent) {
- for (int iEvent = 0; iEvent < 1000; ++iEvent) {
+ for (int iEvent = 0; ; ++iEvent) {
 
-  if (!(iEvent%100)) std::cout<<" ievent = " << iEvent << std::endl;
+  if (!(iEvent%500)) std::cout<<" ievent = " << iEvent << std::endl;
 
   // Generate events, and check whether generation failed.
   if (!pythia.next()) {
