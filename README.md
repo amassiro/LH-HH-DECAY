@@ -77,6 +77,8 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         source config.sh
         ./main99.exe     input.lhe    output.hepmc       decay.txt
 
+        ./main99.exe   /tmp/amassiro/atEightTeV_events_patched.lhe        /tmp/amassiro/test-MR410_out.lhe.hepmc      ../../HHtobbbb.txt
+
  * Only hadronization "main98"
 
         ln -s ../../Makefile
@@ -85,7 +87,6 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         source config.sh
         ./main98.exe   input.lhe     output.hepmc
 
-        ./main98.exe   /tmp/amassiro/atEightTeV_events_patched.lhe        /tmp/amassiro/test-MR410_out.lhe.hepmc
         ./main98.exe   /tmp/amassiro/TT_CT10_13TeV-powheg-reduced.lhe     /tmp/amassiro/test-ttbar.lhe.hepmc
 
 
