@@ -85,8 +85,8 @@ int main() {
  pythia.readString("-24:onIfMatch = 14 -13"); // mu numu
 
  pythia.readString("25:m0 = 125");
- pythia.readString("25:onMode = off");
- pythia.readString("25:onIfMatch = 5 -5"); //bb
+//  pythia.readString("25:onMode = off");
+//  pythia.readString("25:onIfMatch = 5 -5"); //bb
 //  pythia.readString("25:onIfMatch = 24 -24"); //WW
  
  pythia.readString("35:m0 = 125");
