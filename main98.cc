@@ -100,10 +100,6 @@ int main(int argc, char **argv) {
 
  for (int iEvent = 0; ; ++iEvent) {
 
-  if (iEvent < startEntry) continue;
-  if (endEntry!=-1 && iEvent>=endEntry) break;
-
-
   if (!(iEvent%500)) std::cout<<" ievent = " << iEvent << std::endl;
 
   // Generate events, and check whether generation failed.
@@ -116,6 +112,10 @@ int main(int argc, char **argv) {
    if (++iAbort < nAbort) continue;
    break;
   }
+
+  //---- subrange of events ----
+  if (iEvent < startEntry) continue;
+  if (endEntry!=-1 && iEvent>=endEntry) break;
 
   // Construct new empty HepMC event and fill it.
   // Units will be as chosen for HepMC build; but can be changed
