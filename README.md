@@ -113,11 +113,12 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 
         python SubmitHadronizePythia8.py  ttbar     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc
 
-        python SubmitHadronizePythia8.py  ttbar_1     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg-1.hepmc      0    1000
-        python SubmitHadronizePythia8.py  ttbar_2     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg-2.hepmc   1000    2000
-        python SubmitHadronizePythia8.py  ttbar_3     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg-3.hepmc   2000    8000
-        python SubmitHadronizePythia8.py  ttbar_4     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg-4.hepmc   8000   10000
-        python SubmitHadronizePythia8.py  ttbar_5     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg-5.hepmc  10000   15000
+        python SubmitHadronizePythia8.py  ttbar_1     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc      0    5000
+        python SubmitHadronizePythia8.py  ttbar_2     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc   5000   10000
+        python SubmitHadronizePythia8.py  ttbar_3     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc  10000   20000
+        python SubmitHadronizePythia8.py  ttbar_4     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc  20000   30000
+        python SubmitHadronizePythia8.py  ttbar_5     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc  30000   40000
+        python SubmitHadronizePythia8.py  ttbar_6     /eos/cms/store/lhe/9007/     TT_CT10_13TeV-powheg.lhe     /eos/cms/store/user/amassiro/HH/Background      TT_CT10_13TeV-powheg.hepmc  40000   50000
 
 
   to run Higgs decay on batch system (NB Center of mass energy is taken from LHE file by Pythia8!):

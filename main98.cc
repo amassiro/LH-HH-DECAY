@@ -37,7 +37,14 @@ int main(int argc, char **argv) {
  int energy = 13;
  if (argc >= 4) energy = atoi(argv[3]);
 
+ int startEntry = 0;
+ if (argc >= 5) startEntry = atoi(argv[4]);
+ int endEntry = -1;
+ if (argc >= 6) endEntry   = atoi(argv[5]);
+
  std::cout << " energy       = " << energy << std::endl;
+ std::cout << " startEntry   = " << startEntry << std::endl;
+ std::cout << " endEntry     = " << endEntry << std::endl;
 
  // output file
  // we want to store the list of all final state particles
@@ -90,7 +97,12 @@ int main(int argc, char **argv) {
 
  // Begin event loop; generate until none left in input file.
 //  for (int iEvent = 0; iEvent < 200; ++iEvent) {
+
  for (int iEvent = 0; ; ++iEvent) {
+
+  if (iEvent < startEntry) continue;
+  if (endEntry!=-1 && iEvent>=endEntry) break;
+
 
   if (!(iEvent%500)) std::cout<<" ievent = " << iEvent << std::endl;
 
@@ -116,19 +128,6 @@ int main(int argc, char **argv) {
   ascii_io << hepmcevt;
 
   delete hepmcevt;
-  
-  
-//   std::cout << "Number of particles = " << pythia.event.size() << std::endl;
-//   // Some checks on the event record
-//   // Check for example that at least we have two bs and two bbars
-//   for (int i = 0; i < pythia.event.size(); i++){
-//    int particle_id = pythia.event[i].id();
-//    int particle_status = pythia.event[i].status();
-//    int particle_mother = pythia.event[i].mother1();
-//    if (abs(particle_id) == 11 || abs(particle_id) == 13 ) std::cout << " [" << i << ":" << pythia.event.size() << " particle_status = " << particle_status << " id = " << particle_id << std::endl;
-//   } 
-  
-  
   // End of event loop.
  }
 
