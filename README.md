@@ -67,6 +67,29 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 * Go in the examples directory and link our hadronization stuff, and compile it
 
 
+# LHE parton analysis:
+
+ * Pythia decay of HH signal without hadronization.
+ * LHE output
+ * main97.cc
+
+    cd /afs/cern.ch/user/a/amassiro/work/Generation/HH/Pythia8/LH-HH-DECAY/
+    cd pythia8153/examples
+    ln -s ../../Makefile .
+    ln -s ../../main97.cc .
+    make main97
+    source config.sh
+    ./main97.exe    ../../atEightTeV_events_TEST_H35H25.lhe    output.lhe       ../../HHtoWWbb.txt
+
+but first:
+
+    modify H -> 35, to make it properly decay
+    35 > bb
+    25 > WW/gg/bb
+
+    awk '/\ \ 25\ \ /&&v++%2{sub(/\ \ 25\ \ \ \ 1/, "\ \ 35\ \ \ \ 1")}{print}' ../../atEightTeV_events_TEST.lhe  >  ../../atEightTeV_events_TEST_H35H25.lhe
+
+
 # HEPMC dump:
 
  * H decay included "main99"

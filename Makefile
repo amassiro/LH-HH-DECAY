@@ -54,6 +54,17 @@ main98: \
 	@ln -fs $(BINDIR)/$@.exe $@.exe
 
 
+main97: \
+	$(PYTHIA8LOCATION)/$(LIBDIRARCH)/libpythia8.a $(PYTHIA8LOCATION)/$(LIBDIRARCH)/libhepmcinterface.a
+	@mkdir -p $(BINDIR)
+	$(CXX) $(CXXFLAGS) -I$(PYTHIA8LOCATION)/$(INCDIR) -I$(HEPMCLOCATION)/include $@.cc -o $(BINDIR)/$@.exe \
+	-L$(PYTHIA8LOCATION)/$(LIBDIRARCH) -lpythia8 -llhapdfdummy $(LIBGZIP) \
+	-lhepmcinterface \
+	-L$(HEPMCLOCATION)/lib -lHepMC
+	@ln -fs $(BINDIR)/$@.exe $@.exe
+
+
+
 # Create an executable for one of the normal test programs
 main00  main01 main02 main03 main04 main05 main06 main07 main08 main09 main10 \
 	main11 main12 main13 main14 main15 main16 main17 main18 main19 main20 \
