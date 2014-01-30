@@ -73,6 +73,7 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
  * LHE output
  * main97.cc
 
+
       cd /afs/cern.ch/user/a/amassiro/work/Generation/HH/Pythia8/LH-HH-DECAY/
       cd pythia8153/examples
       ln -s ../../Makefile .
@@ -94,6 +95,7 @@ but first:
  * Pythia decay of WW into lvlv without hadronization.
  * LHE output
  * main96.cc
+
 
       cd /afs/cern.ch/user/a/amassiro/work/Generation/HH/Pythia8/LH-HH-DECAY/
       cd pythia8153/examples
