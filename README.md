@@ -95,14 +95,14 @@ but first:
  * LHE output
  * main96.cc
 
-    cd /afs/cern.ch/user/a/amassiro/work/Generation/HH/Pythia8/LH-HH-DECAY/
-    cd pythia8153/examples
-    ln -s ../../Makefile .
-    ln -s ../../main96.cc .
-    make main96
-    source config.sh
-    cp /afs/cern.ch/user/a/amassiro/public/xLHTF/hhwwbb/wwbbjj/unweighted_events.lhe /tmp/amassiro/
-    ./main96.exe   /tmp/amassiro/unweighted_events.lhe    output.lhe
+     cd /afs/cern.ch/user/a/amassiro/work/Generation/HH/Pythia8/LH-HH-DECAY/
+     cd pythia8153/examples
+     ln -s ../../Makefile .
+     ln -s ../../main96.cc .
+     make main96
+     source config.sh
+     cp /afs/cern.ch/user/a/amassiro/public/xLHTF/hhwwbb/wwbbjj/unweighted_events.lhe /tmp/amassiro/
+     ./main96.exe   /tmp/amassiro/unweighted_events.lhe    output.lhe
 
 
 This one:
