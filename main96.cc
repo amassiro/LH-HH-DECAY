@@ -66,8 +66,10 @@ int main(int argc, char **argv) {
  pythia.readString("-24:onMode = off");
  pythia.readString("24:onIfMatch = 12 11"); // e ve
  pythia.readString("24:onIfMatch = 14 13"); // mu numu
+ pythia.readString("24:onIfMatch = 15 16"); // tau nutau
  pythia.readString("-24:onIfMatch = 12 -11"); // e ve
  pythia.readString("-24:onIfMatch = 14 -13"); // mu numu
+ pythia.readString("-24:onIfMatch = 15 -16"); // tau nutau
 
  // Initialization
  pythia.init();
