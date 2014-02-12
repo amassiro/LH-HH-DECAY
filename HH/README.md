@@ -13,6 +13,7 @@ modify H -> 35, to make it properly decay
 
 
 decay HH:
+(compile and run on slc6)
 
     cd /afs/cern.ch/user/a/amassiro/work/Generation/HH/Pythia8/LH-HH-DECAY/
     cd pythia8153/examples
@@ -21,4 +22,7 @@ decay HH:
     make main97
     source config.sh
     ./main97.exe    /tmp/amassiro/MGraviton_1000_H35H25.lhe  /tmp/amassiro/MGraviton_1000_H35H25_WWbb.lhe       ../../HHtoWWbb.txt
+
+
+
 
