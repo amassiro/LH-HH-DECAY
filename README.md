@@ -95,6 +95,13 @@ but first:
         cp /afs/cern.ch/user/a/amassiro/public/xLHTF/hhwwbb/wwbbjj/unweighted_events.lhe /tmp/amassiro/
         ./main96.exe   /tmp/amassiro/unweighted_events.lhe    output.lhe
 
+        cp /afs/cern.ch/user/a/amassiro/public/xLHTF/hhwwbb/wwbbjj_ptb20/unweighted_events.lhe  /tmp/amassiro/
+       ./main96.exe   /tmp/amassiro/unweighted_events.lhe    /tmp/amassiro/wwbbjj_ptb20_llvv.lhe
+
+
+        mkdir /afs/cern.ch/user/a/amassiro/public/xLHTF/hhwwbb/wwbbjj_ptb20_lvlv/ 
+        cp  /tmp/amassiro/wwbbjj_ptb20_llvv.lhe    /afs/cern.ch/user/a/amassiro/public/xLHTF/hhwwbb/wwbbjj_ptb20_lvlv/
+
 
 This one:
 
