@@ -26,3 +26,20 @@ decay HH:
 
 
 
+All
+=======
+
+copy
+
+    cp /afs/cern.ch/work/a/acarvalh/phenoHH/model_LHEfiles/bulk_graviton/Madgraphcg0_0137_all/    /tmp/amassiro/
+
+decay
+
+    cd /afs/cern.ch/user/a/amassiro/work/Generation/HH/Pythia8/LH-HH-DECAY/
+    cd pythia8153/examples
+    ln -s ../../Makefile .
+    ln -s ../../main97.cc .
+    make main97
+    source config.sh
+
+    ls /tmp/amassiro/MGraviton_*.lhe  | tr "/" " " | tr "." " "  | awk '{print "./main97.exe  /tmp/amassiro/"$3".lhe     /tmp/amassiro/"$3"_ww_lvlv.lhe"}'
