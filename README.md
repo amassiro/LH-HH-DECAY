@@ -5,7 +5,7 @@ Make di-H events decay and hadronize in CMSSW
 
  * get git repo
 
-        git clone git@github.com:amassiro/LH-HH-DECAY.git</li>
+        git clone git@github.com:amassiro/LH-HH-DECAY.git
 
  * copy into CMSSWrelease the cfg file
 
@@ -55,6 +55,10 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         make -j 8
 
 * Go in the examples directory and link our hadronization stuff, and compile it
+
+        cd examples
+        rm configure ; ln -s ../../LH-HH-DECAY/configure
+        for main in `echo "main00.cc main96.cc main97.cc main98.cc main99.cc"`; do rm ${main}; ln -s ../../LH-HH-DECAY/${main}; done
 
 
 # LHE parton analysis:
