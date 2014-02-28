@@ -51,14 +51,15 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 * Compile pythia (works out of the box on lxplus *slc6*, custom makefiles are needed for linking boost librairies [compulsory for `.lhe.gz` format]):
 
         cd pythia8153/
+        mv configure old_configure; ln -s ../LH-HH-DECAY/configure .
         ./configure --enable-gzip  --with-hepmcversion=2.06.08
         make -j 8
 
 * Go in the examples directory and link our hadronization stuff, and compile it
 
         cd examples
-        rm configure ; ln -s ../../LH-HH-DECAY/configure
-        for main in `echo "main00.cc main96.cc main97.cc main98.cc main99.cc"`; do rm ${main}; ln -s ../../LH-HH-DECAY/${main}; done
+        ./configure
+        make main01
 
 
 # LHE parton analysis:
