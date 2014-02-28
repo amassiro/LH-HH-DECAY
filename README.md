@@ -62,7 +62,10 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
         ln -s ../../LH-HH-DECAY/main99.cc .
         mv Makefile old_Makefile; ln -s ../../LH-HH-DECAY/Makefile .
         make main99
+        export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/afs/cern.ch/sw/lcg/external/HepMC/2.06.08/x86_64-slc5-gcc43-opt/lib
+        ./main99.exe
 
+* For the rest of the instructions on how to hadronize / decay / launch on batch, go check the "HEPMC dump" section
 
 # LHE parton analysis:
 
