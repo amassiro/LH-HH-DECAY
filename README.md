@@ -59,7 +59,9 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 
         cd examples
         ./configure
-        make main01
+        ln -s ../../LH-HH-DECAY/main99.cc .
+        mv Makefile old_Makefile; ln -s ../../LH-HH-DECAY/Makefile .
+        make main99
 
 
 # LHE parton analysis:
