@@ -316,7 +316,7 @@ if [ "x${ENABLEGZIP}" = "xyes" ]; then
 
   # Default locations if none given
   if [ "x${BOOSTLOCATION}" = "x" ]; then
-    BOOSTLOCATION=/usr
+    BOOSTLOCATION=/afs/cern.ch/sw/lcg/external/Boost/1.48.0_python2.6/${MYLCGPLATFORM}
   fi
   if [ "x${ZLIBLOCATION}" = "x" ]; then
     ZLIBLOCATION=/usr/lib
