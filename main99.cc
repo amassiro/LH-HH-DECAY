@@ -4,8 +4,8 @@
 
 
 #include <fstream>
-#include "Pythia.h"
-#include "HepMCInterface.h"
+#include "../include/Pythia.h"
+#include "../include/HepMCInterface.h"
 
 #include "HepMC/GenEvent.h"
 #include "HepMC/IO_GenEvent.h"
