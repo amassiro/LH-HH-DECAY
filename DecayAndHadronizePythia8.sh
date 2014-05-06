@@ -1,98 +1,71 @@
 # |/bin/sh
 # decay and hadronize with cmssw
 
-NUMBERSEED=$1
+# go in verbose mode to check what's happening
+set -x
 
-CASTORFOLDERNAME=$2
+# Setup eos
+alias eos='/afs/cern.ch/project/eos/installation/0.3.15/bin/eos.select'
 
-MODEL=$3
+if [[ -z ${3} ]]
+then
+    echo "Need at least 3 arguments"
+    exit 1
+fi
 
-ENERGY=$4
+INPUT_FILE=${1}
+OUTPUT_FOLDER=${2}
+DECAY_FILE=${3}
+PYTHIA_FOLDER=/afs/cern.ch/work/o/obondu/LesHouches2013/pythia8153
+LH_HH_DECAY_FOLDER=/afs/cern.ch/work/o/obondu/LesHouches2013/LH-HH-DECAY
+# For input = file.lhe, the output is file_DECAY.hepmc
+OUTPUT_FILE=`basename ${INPUT_FILE} .lhe`
+DECAY=`basename ${DECAY_FILE} .txt`
+OUTLOG_FILE="${OUTPUT_FILE}_${DECAY}.eo"
+OUTPUT_FILE="${OUTPUT_FILE}_${DECAY}.hepmc"
 
-CSI=$5
+JOBDIR=`basename ${INPUT_FILE} .lhe`
+mkdir -p ${JOBDIR}
+mkdir -p xmldoc
+cd ${JOBDIR}
+echo ${PWD}
 
-DESTINATIONFOLDER=$6
+# Get everything locally
+cp ${PYTHIA_FOLDER}/xmldoc/* ../xmldoc/ 
+cp ${PYTHIA_FOLDER}/examples/main99.exe .
+cp ${INPUT_FILE} .
+cp ${LH_HH_DECAY_FOLDER}/${DECAY_FILE} . 
+cp ${LH_HH_DECAY_FOLDER}/config.sh .
 
-
-
-# LHE before "higgs" transformation
-# fixed!
-
-# LHE after "higgs" transformation
-NAMELHEMODIFIED=$MODEL"_"$NUMBERSEED"_"$CSI"_"$ENERGY"_unweighted_events_modified.lhe"
-# EDM level file
-NAMEEDM=$MODEL"_"$NUMBERSEED"_"$CSI"_"$ENERGY"_EDM.root"
-# GEN level file
-NAMEGEN=$MODEL"_"$NUMBERSEED"_"$CSI"_"$ENERGY"_GEN.root"
-
-
-
-
-echo ">>> prepare local folder"
-cd /tmp/
-TESTFOLDER="testDecay_"$ENERGY"_"$NUMBERSEED"_"$CSI
-MODELFOLDER="My"$MODEL"_"$CSI
-MODELFOLDERTGZ=$MODELFOLDER"_"$NUMBERSEED"_"$ENERGY".tgz"
-
-mkdir /tmp/$TESTFOLDER
-
-
-echo ">>> copy from castor"
-rfcp $CASTORFOLDERNAME/$MODELFOLDERTGZ ./$TESTFOLDER
-
-
-echo ">>> untar model"
-cd /tmp/$TESTFOLDER
-tar -xf $MODELFOLDERTGZ
-
-
-echo ">>> go to Events folder and gunzip"
-ls
-cd $MODELFOLDER
-cd Events
-ls
-
-# MODEL="SO5" ---> fast fix due to bug! 0 <-> O
-
-NAMEFILELHEGZ=$MODEL"at"$ENERGY"TeV_unweighted_events.lhe.gz"
-gzip -d $NAMEFILELHEGZ
-ls
-
-NAMEFILELHE=$MODEL"at"$ENERGY"TeV_unweighted_events.lhe"
-
-
+# Be prepared to decay the Higgses
 echo ">>>  modify H -> 35, to make it properly decay"
 echo ">>>       35 > bb"
 echo ">>>       25 > WW/gg/bb"
+INPUT_FILE_READY_FOR_DECAY=`basename ${INPUT_FILE} .lhe`
+INPUT_FILE_READY_FOR_DECAY="${INPUT_FILE_READY_FOR_DECAY}_readyForDecay.lhe"
+awk '/\ \ 25\ \ /&&v++%2{sub(/\ \ 25\ \ \ \ 1/, "\ \ 35\ \ \ \ 1")}{print}' ${INPUT_FILE}  >  ${INPUT_FILE_READY_FOR_DECAY}
 
-NAMELHEMODIFIED=$MODEL"at"$ENERGY"TeV_unweighted_events_modified.lhe"
-awk '/\ \ 25\ \ /&&v++%2{sub(/\ \ 25\ \ \ \ 1/, "\ \ 35\ \ \ \ 1")}{print}' $NAMEFILELHE  >  /tmp/$TESTFOLDER/$NAMELHEMODIFIED
+# Get the main99 doing the job
+echo ${PWD}
+ls -l
 
-
-echo ">>>  decay the Higgs and hadronize"
-head  /tmp/$TESTFOLDER/$NAMELHEMODIFIED
-echo "..."
-tail  /tmp/$TESTFOLDER/$NAMELHEMODIFIED
-
-cd /afs/cern.ch/user/a/amassiro/work/Generation/HH/Pythia8/LH-HH-DECAY/pythia8153/examples/
 source config.sh
-case ${DESTINATIONFOLDER} in
-    "WWbb" )
-        ./main99.exe    /tmp/$TESTFOLDER/$NAMELHEMODIFIED     /tmp/$TESTFOLDER/$NAMEGEN   ../../HHtoWWbb.txt
-        ;;
-    "ggbb" )
-        ./main99.exe    /tmp/$TESTFOLDER/$NAMELHEMODIFIED     /tmp/$TESTFOLDER/$NAMEGEN   ../../HHtoggbb.txt
-        ;;
-esac
+./main99.exe `basename ${INPUT_FILE_READY_FOR_DECAY}` ${OUTPUT_FILE} ${DECAY_FILE} 2> ${OUTLOG_FILE} | tee ${OUTLOG_FILE}
 
-cd -
+echo ${PWD}
+ls -l
 
+# Zip and copy back the output and the logs, perform some post-job cleanup
+gzip ${OUTPUT_FILE}
+echo ${PWD}
+ls -l
 
+eos cp ${OUTPUT_FILE} ${OUTPUT_FOLDER}/
+eos cp ${OUTLOG_FILE} ${OUTPUT_FOLDER}/
+#cp ${OUTPUT_FILE}.gz ${OUTPUT_FOLDER}
+#cp ${OUTLOG_FILE} ${OUTPUT_FOLDER}
 
-echo ">>> copy result"
-/afs/cern.ch/project/eos/installation/0.2.31/bin/eos.select cp  /tmp/$TESTFOLDER/$NAMEGEN   /eos/cms/store/user/amassiro/HH/VBF/$DESTINATIONFOLDER/
+#rm ${INPUT_FILE_READY_FOR_DECAY}
+#rm ${OUTPUT_FILE}.gz ${OUTLOG_FILE}
 
-
-echo ">>> clean up a little"
-rm -rf /tmp/$TESTFOLDER/
 

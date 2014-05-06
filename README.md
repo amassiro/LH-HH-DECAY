@@ -5,7 +5,7 @@ Make di-H events decay and hadronize in CMSSW
 
  * get git repo
 
-        git clone git@github.com:amassiro/LH-HH-DECAY.git</li>
+        git clone git@github.com:amassiro/LH-HH-DECAY.git
 
  * copy into CMSSWrelease the cfg file
 
@@ -51,11 +51,21 @@ _be sure not to have CMSSW environment loaded for the following operations, it i
 * Compile pythia (works out of the box on lxplus *slc6*, custom makefiles are needed for linking boost librairies [compulsory for `.lhe.gz` format]):
 
         cd pythia8153/
+        mv configure old_configure; ln -s ../LH-HH-DECAY/configure .
         ./configure --enable-gzip  --with-hepmcversion=2.06.08
         make -j 8
 
 * Go in the examples directory and link our hadronization stuff, and compile it
 
+        cd examples
+        ./configure
+        ln -s ../../LH-HH-DECAY/main99.cc .
+        mv Makefile old_Makefile; ln -s ../../LH-HH-DECAY/Makefile .
+        make main99
+        export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/afs/cern.ch/sw/lcg/external/HepMC/2.06.08/x86_64-slc5-gcc43-opt/lib
+        ./main99.exe
+
+* For the rest of the instructions on how to hadronize / decay / launch on batch, go check the "HEPMC dump" section
 
 # LHE parton analysis:
 
